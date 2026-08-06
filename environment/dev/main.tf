@@ -28,10 +28,10 @@ module "nic" {
 }
 
 module "nsg" {
-  nsgs       = var.nsg
+  nsgs             = var.nsg
   nsg_associations = var.nsg_associations
-  source     = "../../child_module/nsg"
-  depends_on = [module.nic]
+  source           = "../../child_module/nsg"
+  depends_on       = [module.nic]
 }
 module "vm" {
   vms        = var.vm

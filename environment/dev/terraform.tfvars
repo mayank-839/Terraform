@@ -99,7 +99,6 @@ nsg = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       }
-
     ]
   }
 
@@ -132,18 +131,17 @@ nsg = {
         destination_address_prefix = "*"
       }
     ]
-
   }
 }
 
 nsg_associations = {
   nsg1 = {
-    nic_name = "frontend-nic"
+    nic_name            = "frontend-nic"
     resource_group_name = "rg-mayank"
 
   }
   nsg2 = {
-    nic_name = "backend-nic"
+    nic_name            = "backend-nic"
     resource_group_name = "rg-mayank"
 
   }
