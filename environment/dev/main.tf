@@ -27,12 +27,12 @@ module "nic" {
   depends_on = [module.subnet, module.pip]
 }
 
-# module "nsg" {
-#   nsgs             = var.nsg
-#   nsg_associations = var.nsg_associations
-#   source           = "../../child_module/nsg"
-#   depends_on       = [module.nic]
-# }
+module "nsg" {
+  nsgs       = var.nsg
+  nsg_associations = var.nsg_associations
+  source     = "../../child_module/nsg"
+  depends_on = [module.nic]
+}
 module "vm" {
   vms        = var.vm
   source     = "../../child_module/vm"

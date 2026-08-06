@@ -47,7 +47,7 @@ pip = {
 
 nic = {
   nic1 = {
-    nic_name                          = "frontend-nic"
+    nic_name                      = "frontend-nic"
     resource_group_name           = "rg-mayank"
     location                      = "central india"
     ip_config_name                = "frontend-ipconfig"
@@ -57,7 +57,7 @@ nic = {
     virtual_network_name          = "vnet-mayank"
   }
   nic2 = {
-    nic_name                          = "backend-nic"
+    nic_name                      = "backend-nic"
     resource_group_name           = "rg-mayank"
     location                      = "central india"
     ip_config_name                = "backend-ipconfig"
@@ -69,50 +69,85 @@ nic = {
 }
 
 
-# nsg = {
-#   nsg1 = {
-#     name                = "frontend-nsg"
-#     resource_group_name = "rg-mayank"
-#     location            = "central india"
+nsg = {
+  nsg1 = {
+    name                = "frontend-nsg"
+    resource_group_name = "rg-mayank"
+    location            = "central india"
 
-#     name1                      = "ssh"
-#     priority                   = 100
-#     direction                  = "Inbound"
-#     access                     = "Allow"
-#     protocol                   = "Tcp"
-#     source_port_range          = "*"
-#     destination_port_range     = "22"
-#     source_address_prefix      = "*"
-#     destination_address_prefix = "*"
-#   }
+    rules = [
 
-#   nsg2 = {
-#     name                = "backend-nsg"
-#     resource_group_name = "rg-mayank"
-#     location            = "central india"
+      {
+        rule_name                  = "ssh"
+        priority                   = 120
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      },
+      {
+        rule_name                  = "http"
+        priority                   = 200
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "80"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      }
 
-#     name2                       = "ssh"
-#     priority2                   = 100
-#     direction2                  = "Inbound"
-#     access2                     = "Allow"
-#     protocol2                   = "Tcp"
-#     source_port_range2          = "*"
-#     destination_port_range2     = "22"
-#     source_address_prefix2      = "*"
-#     destination_address_prefix2 = "*"
-#   }
-# }
+    ]
+  }
 
-# nsg_associations = {
-#   nsg1 = {
-#     nic_name = "frontend-nic"
+  nsg2 = {
+    name                = "backend-nsg"
+    resource_group_name = "rg-mayank"
+    location            = "central india"
+    rules = [
+      {
+        rule_name                  = "ssh"
+        priority                   = 120
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
 
-#   }
-#   nsg2 = {
-#     nic_name = "backend-nic"
+      },
+      {
+        rule_name                  = "http"
+        priority                   = 200
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "80"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      }
+    ]
 
-#   }
-# }
+  }
+}
+
+nsg_associations = {
+  nsg1 = {
+    nic_name = "frontend-nic"
+    resource_group_name = "rg-mayank"
+
+  }
+  nsg2 = {
+    nic_name = "backend-nic"
+    resource_group_name = "rg-mayank"
+
+  }
+}
 
 vm = {
   vm1 = {

@@ -14,12 +14,12 @@ variable "pip" {
 variable "nic" {
 
 }
-# variable "nsg" {
+variable "nsg" {
 
-# }
-# variable "nsg_associations" {
+}
+variable "nsg_associations" {
 
-# }
+}
 variable "vm" {
 
 }
