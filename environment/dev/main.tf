@@ -36,5 +36,5 @@ module "nsg" {
 module "vm" {
   vms        = var.vm
   source     = "../../child_module/vm"
-  depends_on = [module.nic]
+  depends_on = [module.nic, module.nsg]
 }
