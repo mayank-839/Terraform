@@ -1,0 +1,36 @@
+trigger: 
+ branches:
+   include:
+     - main
+
+pool: infra_agent
+
+stages:
+  - stage: 
+    jobs:
+      - job: 
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: 'environment/prod'
+            backendServiceArm: 'infra_pippeline'
+            backendAzureRmStorageAccountName: 'backendsa1'
+            backendAzureRmContainerName: 'infracontainer'
+            backendAzureRmKey: 'terraform.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: 'environment/prod'
+            environmentServiceNameAzureRM: 'infra_pippeline'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: 'environment/prod'
+            environmentServiceNameAzureRM: 'infra_pippeline'
