@@ -17,20 +17,10 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
-            workingDirectory: 'environment/prod'
+            workingDirectory: 'environment/dev'
             backendServiceArm: 'infra_pippeline'
+            backendAzureRmOverrideSubscriptionID: '15ecf76e-edd4-4aad-bd65-ff767992d273'
+            backendAzureRmResourceGroupName: 'mayank-rg'
             backendAzureRmStorageAccountName: 'backendsa1'
             backendAzureRmContainerName: 'infracontainer'
             backendAzureRmKey: 'terraform.tfstate'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'plan'
-            workingDirectory: 'environment/prod'
-            environmentServiceNameAzureRM: 'infra_pippeline'
-        - task: TerraformTask@5
-          inputs:
-            provider: 'azurerm'
-            command: 'apply'
-            workingDirectory: 'environment/prod'
-            environmentServiceNameAzureRM: 'infra_pippeline'
