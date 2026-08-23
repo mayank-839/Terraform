@@ -34,4 +34,5 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'apply'
+            workingDirectory: 'environment/dev'
             environmentServiceNameAzureRM: 'infra_pippeline'
