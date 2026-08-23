@@ -24,3 +24,14 @@ stages:
             backendAzureRmStorageAccountName: 'backendsa1'
             backendAzureRmContainerName: 'infracontainer'
             backendAzureRmKey: 'terraform.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: 'environment/dev'
+            environmentServiceNameAzureRM: 'infra_pippeline'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            environmentServiceNameAzureRM: 'infra_pippeline'
